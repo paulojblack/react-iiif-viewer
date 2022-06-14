@@ -184,6 +184,7 @@ class MultiViewer extends React.Component {
 
         {FullScreenAPI.isEnabled() &&
             <FullScreenControls
+              modalCloseAction={this.props.modalCloseAction}
               isInFullScreen={this.state.isInFullScreen}
               enterFullScreenHandler={() => this.enterFullScreen()}
               exitFullScreenHandler={() => this.exitFullScreen()}
