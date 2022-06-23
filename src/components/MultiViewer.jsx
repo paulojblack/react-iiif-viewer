@@ -88,11 +88,19 @@ class MultiViewer extends React.Component {
   }
 
   enterFullScreen() {
-    FullScreenAPI.enter(this.reactIIIFViewerRef.current)
+    if (this.props.modalCloseAction) {
+      this.props.modalCloseAction()
+    } else {
+      FullScreenAPI.enter(this.reactIIIFViewerRef.current)
+    }
   }
 
   exitFullScreen() {
-    FullScreenAPI.exit()
+    if (this.props.modalCloseAction) {
+      this.props.modalCloseAction()
+    } else {
+      FullScreenAPI.exit()
+    }
   }
 
   zoomIn() {
@@ -176,6 +184,7 @@ class MultiViewer extends React.Component {
 
         {FullScreenAPI.isEnabled() &&
             <FullScreenControls
+              modalCloseAction={this.props.modalCloseAction}
               isInFullScreen={this.state.isInFullScreen}
               enterFullScreenHandler={() => this.enterFullScreen()}
               exitFullScreenHandler={() => this.exitFullScreen()}
@@ -220,7 +229,8 @@ MultiViewer.propTypes = {
   iiifUrls: PropTypes.array.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
-  showToolbar: PropTypes.bool
+  showToolbar: PropTypes.bool,
+  modalCloseAction: PropTypes.func
 }
 
 MultiViewer.defaultProps = {

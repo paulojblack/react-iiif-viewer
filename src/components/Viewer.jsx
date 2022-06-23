@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import MultiViewer from './MultiViewer'
 
 
-const Viewer = ({iiifUrl, width, height}) => {
+const Viewer = ({iiifUrl, width, height, modalCloseAction}) => {
   return (
     <MultiViewer
       iiifUrls={[iiifUrl]}
       width={width}
       height={height}
+      modalCloseAction={modalCloseAction}
       showToolbar={false}
     />
   )
@@ -17,7 +18,8 @@ const Viewer = ({iiifUrl, width, height}) => {
 Viewer.propTypes = {
   iiifUrl: PropTypes.string.isRequired,
   width: PropTypes.string,
-  height: PropTypes.string
+  height: PropTypes.string,
+  modalCloseAction: PropTypes.func
 }
 
 Viewer.defaultProps = {
